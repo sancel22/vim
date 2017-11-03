@@ -148,7 +148,7 @@ nmap <Leader><Leader>v :e resources/views/<cr>
 nmap <Leader>ut :!ctags -R --exclude=node_modules<cr>
 nmap <Leader>t :!./vendor/phpunit/phpunit/phpunit %<cr>
 
-
+"PHP VIM"
 
 "----AUTO-COMMAND----"
 augroup autosourcing
@@ -171,3 +171,12 @@ endfunction
 autocmd FileType php inoremap <Leader>nf <Esc>:call IPhpExpandClass()<CR>
 autocmd FileType php noremap <Leader>nf :call PhpExpandClass()<CR>
 
+function! PhpSyntaxOverride()
+  hi! def link phpDocTags  phpDefine
+  hi! def link phpDocParam phpType
+endfunction
+
+augroup phpSyntaxOverride
+  autocmd!
+  autocmd FileType php call PhpSyntaxOverride()
+augroup END
